@@ -1,10 +1,11 @@
+// stores/grouping.ts
 import { defineStore, Store } from 'pinia';
 
 // Define the student type
 interface Student {
   id: number;
   name: string;
-  // Add other relevant student information
+  isLeader: boolean;
 }
 
 // Define the group type
@@ -12,7 +13,6 @@ interface Group {
   id: number;
   students: Student[];
   leader: Student;
-  // Add other relevant group information
 }
 
 // Define the store state
@@ -39,12 +39,41 @@ export const useGroupingStore = defineStore({
       this.groups.push(group);
     },
 
-    // Add other actions based on your requirements
+    // Action to fetch groups
+    fetchGroups() {
+      // In a real application, you would fetch groups from an API
+      // For now, let's use dummy data
+      const dummyGroups: Group[] = [
+        {
+          id: 1,
+          students: [{ id: 1, name: 'Erica', isLeader: true }, { id: 2, name: 'Joel', isLeader: false }],
+          leader: { id: 1, name: 'Erica', isLeader: true },
+        },
+        {
+          id: 2,
+          students: [{ id: 3, name: 'Jamil', isLeader: true }, { id: 4, name: 'Alex', isLeader: false }],
+          leader: { id: 3, name: 'Jamil', isLeader: true },
+        },
+        {
+          id: 3,
+          students: [{ id: 5, name: 'Stephen', isLeader: true }, { id: 6, name: 'Alex', isLeader: false }],
+          leader: { id: 5, name: 'Stephen', isLeader: true },
+        },
+      ];
+
+      this.groups = dummyGroups;
+    },
   },
 
   // Getters to compute derived state
   getters: {
-    // Define getters based on your requirements
+    // Example getter to get the total number of students
+    totalStudents(): number {
+        return this.students.length;
+      },
+      getFetchedGroups(): Group[] {
+        return this.groups;
+      },
   },
 });
 
