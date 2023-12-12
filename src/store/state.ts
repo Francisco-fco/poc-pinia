@@ -1,21 +1,17 @@
-// stores/grouping.ts
 import { defineStore, Store } from 'pinia';
 
-// Define the student type
 interface Student {
   id: number;
   name: string;
   isLeader: boolean;
 }
 
-// Define the group type
 interface Group {
   id: number;
   students: Student[];
   leader: Student;
 }
 
-// Define the store state
 interface GroupingState {
   students: Student[];
   groups: Group[];
@@ -39,10 +35,7 @@ export const useGroupingStore = defineStore({
       this.groups.push(group);
     },
 
-    // Action to fetch groups
     fetchGroups() {
-      // In a real application, you would fetch groups from an API
-      // For now, let's use dummy data
       const dummyGroups: Group[] = [
         {
           id: 1,
@@ -65,9 +58,7 @@ export const useGroupingStore = defineStore({
     },
   },
 
-  // Getters to compute derived state
   getters: {
-    // Example getter to get the total number of students
     totalStudents(): number {
         return this.students.length;
       },
@@ -77,5 +68,4 @@ export const useGroupingStore = defineStore({
   },
 });
 
-// Export the store definition type
 export type GroupingStore = Store<'grouping', GroupingState, typeof useGroupingStore>;
