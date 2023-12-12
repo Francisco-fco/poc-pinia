@@ -12,15 +12,15 @@ interface Group {
   leader: Student;
 }
 
-interface GroupingState {
+interface State {
   students: Student[];
   groups: Group[];
 }
 
 // Define the store
-export const useGroupingStore = defineStore({
+export const useStore = defineStore({
   id: 'grouping',
-  state: (): GroupingState => ({
+  state: (): State => ({
     students: [],
     groups: [],
   }),
@@ -68,4 +68,4 @@ export const useGroupingStore = defineStore({
   },
 });
 
-export type GroupingStore = Store<'grouping', GroupingState, typeof useGroupingStore>;
+export type GroupingStore = Store<'grouping', State, typeof useStore>;

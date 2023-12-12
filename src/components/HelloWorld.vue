@@ -35,9 +35,9 @@
 
 <script setup lang="ts">
 import { ref, onMounted } from 'vue';
-import { useGroupingStore, GroupingStore } from '@/store/state.ts';
+import { useStore, Store } from '@/store/state.ts';
 
-const store: GroupingStore = useGroupingStore();
+const store: Store = useStore();
 const newStudentName = ref('');
 const isLeader = ref(false);
 const selectedGroup = ref(1); // Default group ID
