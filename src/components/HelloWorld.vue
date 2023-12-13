@@ -4,12 +4,13 @@
       <h3>Groups</h3>
       <hr>
       <span v-for="group in store.groups" :key="group.id">
-        <p>Group ID: {{ group.id }}</p>
-        <p>Leader: {{ group.leader.name }}</p>
-        <p>Students:</p>
+        <p><strong>Group ID:</strong> {{ group.id }}</p>
+        <p><strong>Leader:</strong> {{ group.leader.name }}</p>
+        <p>
         <span v-for="student in group.students" :key="student.id">
           {{ student.name }} (Leader: {{ student.isLeader ? 'Yes' : 'No' }})
         </span>
+        </p>
         <hr>
       </span>
     </div>
@@ -17,11 +18,11 @@
     <div>
       <h3>Add Student</h3>
       <form @submit.prevent="addStudent">
-        <label for="studentName">Student Name:</label>
+        <label for="studentName">Student Name: </label>
         <input v-model="newStudentName" type="text" id="studentName" required>
-        <label for="isLeader">Is Leader:</label>
+        <label for="isLeader"> Is Leader:</label>
         <input v-model="isLeader" type="checkbox" id="isLeader">
-        <label for="selectedGroup">Select Group:</label>
+        <label for="selectedGroup"> Select Group:</label>
         <select v-model="selectedGroup" id="selectedGroup">
           <option v-for="group in store.groups" :key="group.id" :value="group.id">
             {{ group.id }}
@@ -35,7 +36,7 @@
 
 <script setup lang="ts">
 import { ref, onMounted } from 'vue';
-import { useStore, Store } from '@/store/state.ts';
+import { useStore, Store } from '@/store/state';
 
 const store: Store = useStore();
 const newStudentName = ref('');
@@ -77,5 +78,8 @@ const addStudent = () => {
 <style scoped>
 .read-the-docs {
   color: #888;
+}
+button {
+  margin-left: 1vw;
 }
 </style>

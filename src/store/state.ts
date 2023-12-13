@@ -17,7 +17,6 @@ interface State {
   groups: Group[];
 }
 
-// Define the store
 export const useStore = defineStore({
   id: 'grouping',
   state: (): State => ({
