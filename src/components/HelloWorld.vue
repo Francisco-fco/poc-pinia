@@ -1,5 +1,6 @@
 <template>
   <div>
+    <Header />
     <div>
       <h3>Groups</h3>
       <hr>
@@ -34,44 +35,54 @@
   </div>
 </template>
 
-<script setup lang="ts">
+<script lang="ts">
 import { ref, onMounted } from 'vue';
 import { useStore, Store } from '@/store/state';
+import Header from '../components/Header.vue'
 
-const store: Store = useStore();
-const newStudentName = ref('');
-const isLeader = ref(false);
-const selectedGroup = ref(1); // Default group ID
+export default {
+  components: {
+    Header,
+  },
+  setup() {
+    const store: Store = useStore();
+    const newStudentName = ref('');
+    const isLeader = ref(false);
+    const selectedGroup = ref(1); // Default group ID
 
-// Fetch groups when the component is mounted
-onMounted(() => {
-  store.fetchGroups();
-});
+    // Fetch groups when the component is mounted
+    onMounted(() => {
+      store.fetchGroups();
+    });
 
-const addStudent = () => {
-  const newStudent = {
-    id: store.totalStudents + 1, // Incrementing the ID for simplicity (you might want to handle this differently)
-    name: newStudentName.value,
-    isLeader: isLeader.value,
-  };
+    const addStudent = () => {
+      const newStudent = {
+        id: store.totalStudents + 1, // Incrementing the ID for simplicity (you might want to handle this differently)
+        name: newStudentName.value,
+        isLeader: isLeader.value,
+      };
 
-  const groupIndex = store.groups.findIndex(group => group.id === selectedGroup.value);
-  if (groupIndex !== -1) {
-    // Add the new student to the selected group
-    store.groups[groupIndex].students.push(newStudent);
-    if (isLeader.value) {
-      // If the new student is a leader, update the group leader
-      store.groups[groupIndex].leader = newStudent;
-    }
+      const groupIndex = store.groups.findIndex(group => group.id === selectedGroup.value);
+      if (groupIndex !== -1) {
+        // Add the new student to the selected group
+        store.groups[groupIndex].students.push(newStudent);
+        if (isLeader.value) {
+          // If the new student is a leader, update the group leader
+          store.groups[groupIndex].leader = newStudent;
+        }
 
-    // Add the new student to the global list of students
-    store.addStudent(newStudent);
+        // Add the new student to the global list of students
+        store.addStudent(newStudent);
+      }
+
+      // Reset form fields
+      newStudentName.value = '';
+      isLeader.value = false;
+      selectedGroup.value = 1; // Reset to default group ID
+    };
+
+    return { store, newStudentName, isLeader, selectedGroup, addStudent };
   }
-
-  // Reset form fields
-  newStudentName.value = '';
-  isLeader.value = false;
-  selectedGroup.value = 1; // Reset to default group ID
 };
 </script>
 
