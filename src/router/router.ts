@@ -1,6 +1,5 @@
 import { createRouter, createWebHistory, RouteRecordRaw, RouteLocationNormalized, NavigationGuardNext } from 'vue-router' 
 
-import store from '@/store/store'
 import { computed } from 'vue'
 
 const routes: Array<RouteRecordRaw> = [
@@ -22,22 +21,6 @@ const router = createRouter({
 
 router.beforeEach(async (to: RouteLocationNormalized, from: RouteLocationNormalized, next: NavigationGuardNext) => {
   next();
-});
-
-router.beforeResolve(async (to, from) => {
-  //console.log('from ', from);
-  //console.log('to ', to);
-   //ask for microphone:
- /*   if(to.meta.requiresMic){
-     try {
-       await navigator.mediaDevices.getUserMedia({ audio: true })
-     }
-     catch (err) {
-       alert('Cannot proceed without allowing access to mic. Enable access and reload the page')
-       return false
-   
-     }
-   } */
 });
 
 export default router;

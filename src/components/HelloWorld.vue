@@ -50,7 +50,6 @@ export default {
     const isLeader = ref(false);
     const selectedGroup = ref(1); // Default group ID
 
-    // Fetch groups when the component is mounted
     onMounted(() => {
       store.fetchGroups();
     });
@@ -64,18 +63,14 @@ export default {
 
       const groupIndex = store.groups.findIndex(group => group.id === selectedGroup.value);
       if (groupIndex !== -1) {
-        // Add the new student to the selected group
         store.groups[groupIndex].students.push(newStudent);
         if (isLeader.value) {
-          // If the new student is a leader, update the group leader
           store.groups[groupIndex].leader = newStudent;
         }
 
-        // Add the new student to the global list of students
         store.addStudent(newStudent);
       }
 
-      // Reset form fields
       newStudentName.value = '';
       isLeader.value = false;
       selectedGroup.value = 1; // Reset to default group ID
