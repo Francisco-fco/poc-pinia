@@ -44,11 +44,20 @@ export const useStore = defineStore({
     },
 
     startPolling() {
-      this.fetchPosts();
-
-      setInterval(() => {
-        this.fetchPosts();
-      }, 10000);
+      console.log('In POLLING')
+      const delay = 10000;
+      let intervalCount = 0;
+    
+      const fetchData = () => {
+        const polledPosts = this.fetchPosts();
+        intervalCount++;
+        if (intervalCount < 5) {
+          console.log(intervalCount)
+          setTimeout(fetchData, delay + (intervalCount * 10000));
+        }
+        console.log("POLLED: ", this.posts)
+      };
+      setTimeout(fetchData, delay);
     },
   },
 

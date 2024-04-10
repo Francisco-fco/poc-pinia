@@ -2,11 +2,15 @@
   "posts": [
     {
       "id": 1,
-      "text": "asdasdsadsadasdas"
+      "text": "sdfsdfsdfsdfsd"
     },
     {
       "id": 2,
-      "text": "another one"
+      "text": "hfghfghfgh"
+    },
+    {
+      "id": 3,
+      "text": "gsfdgsfdgsfdgsfdgsfdgsfdg"
     }
   ]
 }
