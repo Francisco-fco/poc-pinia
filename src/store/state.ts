@@ -1,68 +1,60 @@
 import { defineStore, Store } from 'pinia';
+import axios from 'axios';
 
-interface Student {
+interface Post {
   id: number;
-  name: string;
-  isLeader: boolean;
-}
-
-interface Group {
-  id: number;
-  students: Student[];
-  leader: Student;
+  text: string;
 }
 
 interface State {
-  students: Student[];
-  groups: Group[];
+  posts: Post[];
 }
 
 export const useStore = defineStore({
   id: 'grouping',
   state: (): State => ({
-    students: [],
-    groups: [],
+    posts: [],
   }),
 
   // Actions to update the state
   actions: {
-    addStudent(student: Student) {
-      this.students.push(student);
+    addPost(post: Post) {
+      console.log('newPost in state: ', post)
+      this.posts.push(post);
     },
 
-    addGroup(group: Group) {
-      this.groups.push(group);
+    async fetchPosts() {
+      try {
+        const response = await axios.get('http://localhost:3000/posts');
+        this.posts = response.data;
+      } catch (error) {
+        console.error('Error:', error);
+      }
     },
 
-    fetchGroups() {
-      const dummyGroups: Group[] = [
-        {
-          id: 1,
-          students: [{ id: 1, name: 'Erica', isLeader: true }, { id: 2, name: 'Joel', isLeader: false }],
-          leader: { id: 1, name: 'Erica', isLeader: true },
-        },
-        {
-          id: 2,
-          students: [{ id: 3, name: 'Jamil', isLeader: true }, { id: 4, name: 'Alex', isLeader: false }],
-          leader: { id: 3, name: 'Jamil', isLeader: true },
-        },
-        {
-          id: 3,
-          students: [{ id: 5, name: 'Stephen', isLeader: true }, { id: 6, name: 'Alex', isLeader: false }],
-          leader: { id: 5, name: 'Stephen', isLeader: true },
-        },
-      ];
+    async createPost(post: Post) {
+      try {
+        console.log('NewPost: ', post)
 
-      this.groups = dummyGroups;
+        const response = await axios.post('http://localhost:3000/posts', post);
+        console.log('Response:', response.data);
+      } catch (error) {
+        console.error('Error:', error);
+      }
+    },
+
+    startPolling() {
+      this.fetchPosts();
+
+      setInterval(() => {
+        this.fetchPosts();
+      }, 10000);
     },
   },
 
   getters: {
-    totalStudents(): number {
-        return this.students.length;
-      },
-      getFetchedGroups(): Group[] {
-        return this.groups;
+    totalPosts(): number {
+        return this.posts.length;
       },
   },
 });

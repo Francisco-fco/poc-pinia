@@ -1,7 +1,7 @@
 <template>
-<div>
-  <HelloWorld msg="Vite + Vue" />
-</div>
+<div style="width: 50vw; height: 100vh">
+  <HelloWorld />
+  </div>
 </template>
 
 <script setup lang="ts">

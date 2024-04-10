@@ -5,7 +5,6 @@
       <h3>Groups</h3>
       <hr>
       <span v-for="group in store.groups" :key="group.id">
-        <p><strong>Group ID:</strong> {{ group.id }}</p>
         <p><strong>Leader:</strong> {{ group.leader.name }}</p>
         <p>
         <span v-for="student in group.students" :key="student.id">
@@ -17,19 +16,19 @@
     </div>
 
     <div>
-      <h3>Add Student</h3>
-      <form @submit.prevent="addStudent">
-        <label for="studentName">Student Name: </label>
-        <input v-model="newStudentName" type="text" id="studentName" required>
-        <label for="isLeader"> Is Leader:</label>
+      <h3>Post</h3>
+      <form @submit.prevent="addPost">
+        <label>Text: </label>
+        <input v-model="input" type="text" id="input" required>
+        <!-- <label for="isLeader"> Is Leader:</label>
         <input v-model="isLeader" type="checkbox" id="isLeader">
         <label for="selectedGroup"> Select Group:</label>
         <select v-model="selectedGroup" id="selectedGroup">
           <option v-for="group in store.groups" :key="group.id" :value="group.id">
             {{ group.id }}
           </option>
-        </select>
-        <button type="submit">Add Student</button>
+        </select> -->
+        <button type="submit">Post text</button>
       </form>
     </div>
   </div>
@@ -46,37 +45,23 @@ export default {
   },
   setup() {
     const store: Store = useStore();
-    const newStudentName = ref('');
-    const isLeader = ref(false);
-    const selectedGroup = ref(1); // Default group ID
+    const input = ref('');
 
     onMounted(() => {
-      store.fetchGroups();
+      console.log('MOUNTED')
     });
-
-    const addStudent = () => {
-      const newStudent = {
-        id: store.totalStudents + 1, // Incrementing the ID for simplicity (you might want to handle this differently)
-        name: newStudentName.value,
-        isLeader: isLeader.value,
+    
+    let idCounter = 1;
+    const addPost = () => {
+      const newPost = {
+        id: idCounter++,
+        text: input.value,
       };
-
-      const groupIndex = store.groups.findIndex(group => group.id === selectedGroup.value);
-      if (groupIndex !== -1) {
-        store.groups[groupIndex].students.push(newStudent);
-        if (isLeader.value) {
-          store.groups[groupIndex].leader = newStudent;
-        }
-
-        store.addStudent(newStudent);
+      console.log("new post: ", newPost)
+        store.createPost(newPost);
       }
 
-      newStudentName.value = '';
-      isLeader.value = false;
-      selectedGroup.value = 1; // Reset to default group ID
-    };
-
-    return { store, newStudentName, isLeader, selectedGroup, addStudent };
+    return { store, input, addPost };
   }
 };
 </script>
