@@ -4,7 +4,7 @@
     <div>
       <h3>Posts</h3>
       <hr />
-      <p v-for="port in store.ports" :key="port.id">
+      <p v-for="post in store.posts" :key="post.id">
         {{ post }}
       </p>
       <hr />

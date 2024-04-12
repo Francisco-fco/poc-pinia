@@ -1,16 +1,24 @@
 {
   "posts": [
     {
-      "id": 1,
+      "id": "1",
       "text": "sdfsdfsdfsdfsd"
     },
     {
-      "id": 2,
+      "id": "2",
       "text": "hfghfghfgh"
     },
     {
-      "id": 3,
+      "id": "3",
       "text": "gsfdgsfdgsfdgsfdgsfdgsfdg"
+    },
+    {
+      "id": 1,
+      "text": "fadfsdafasd"
+    },
+    {
+      "id": 1,
+      "text": "EN TILL"
     }
   ]
 }
