@@ -22,9 +22,9 @@ export default {
   setup() {
     const store = useStore();
     const user = computed(() => store.user);
-    const $route = useRoute();
+    const route = useRoute();
 
-    return { user, $route };
+    return { user, route };
   }
 };
 </script>

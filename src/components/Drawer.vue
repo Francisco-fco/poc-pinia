@@ -5,15 +5,25 @@
       <button class="close-button" @click="toggleSidebar">✖</button> <!-- Close button -->
       <ul>
         <button><a href="/">Start</a></button>
-        <li><a class="border" href="/my-page">Min sida</a></li>
-        <li><a class="border" href="/emaillist">E-postlistor</a></li>
-        <li><a class="border" href="/emaillist-measure">E-postlistor för åtgärd</a></li>
-        <li><a class="border" href="/shared-maillist">Delade brevlådor</a></li>
-        <li><a class="border" href="/resource-mailboxes">Resursbrevlådor</a></li>
-        <li><a class="border" href="/resource-mailboxes-measure">Resursbrevlådor för åtgärd</a></li>
-        <li><a class="border" href="/contacts">Kontakter</a></li>
-        <li><a class="border" href="/admin">Administration -> DROPDOWN</a></li>
-        <li><a class="border" href="/act-as">Agera som -> DROPDOWN</a></li>
+        <hr>
+        <li><a href="/my-page">Min sida</a></li>
+        <hr>
+        <li><a href="/emaillist">E-postlistor</a></li>
+        <hr>
+        <li><a href="/emaillist-measure">E-postlistor för åtgärd</a></li>
+        <hr>
+        <li><a href="/shared-maillist">Delade brevlådor</a></li>
+        <hr>
+        <li><a href="/resource-mailboxes">Resursbrevlådor</a></li>
+        <hr>
+        <li><a href="/resource-mailboxes-measure">Resursbrevlådor för åtgärd</a></li>
+        <hr>
+        <li><a href="/contacts">Kontakter</a></li>
+        <hr>
+        <li><a href="/admin">Administration -> DROPDOWN</a></li>
+        <hr>
+        <li><a href="/act-as">Agera som -> DROPDOWN</a></li>
+        <hr>
       </ul>
     </nav>
     <div class="overlay" v-if="showSidebar" @click="toggleSidebar"></div>
@@ -47,7 +57,7 @@ img {
 .border { 
   border: solid 1px;
   font-size: 12px;
-  padding: 0.1vw;
+  padding: 0.4vw;
 }
 
 #hamburger-menu {
@@ -74,7 +84,6 @@ img {
   height: 100%;
   background-color: rgb(234, 234, 234);
   transition: 0.3s;
-  padding: 0px 10px;
   box-sizing: border-box;
 }
 

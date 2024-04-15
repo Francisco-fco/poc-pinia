@@ -1,6 +1,5 @@
 <template>
   <div>
-    <Header />
     <div>
       <h3>Posts</h3>
       <hr />
@@ -23,11 +22,9 @@
 <script lang="ts">
 import { ref, onMounted } from "vue";
 import { useStore, Store } from "@/store/state";
-import Header from "../components/Header.vue";
 
 export default {
   components: {
-    Header,
   },
   setup() {
     const store: Store = useStore();
