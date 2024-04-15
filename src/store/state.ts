@@ -55,6 +55,7 @@ export const useStore = defineStore({
           console.log(intervalCount)
           setTimeout(fetchData, delay + (intervalCount * 10000));
         }
+        console.log(polledPosts)
         console.log("POLLED: ", this.posts)
       };
       setTimeout(fetchData, delay);
