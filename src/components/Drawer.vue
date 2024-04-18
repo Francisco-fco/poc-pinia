@@ -1,10 +1,10 @@
 <template>
   <div class="container">
-    <label id="hamburger-menu" @click="toggleSidebar">Meny ☰</label>
     <nav id="sidebar-menu" :style="{ left: showSidebar ? '0' : '-350px' }">
-      <button class="close-button" @click="toggleSidebar">✖</button> <!-- Close button -->
-      <ul>
-        <button><a href="/">Start</a></button>
+      <label id="hamburger-menu" :style="{ left: showSidebar ? 'calc(400px - 80px)' : '10px' }" @click="toggleSidebar">Meny ☰</label>
+      <ul style="padding: 0;">
+        <li><button class="close-button" @click="toggleSidebar">Stäng ✖</button></li>
+        <li><a href="/">Start</a></li>
         <hr>
         <li><a href="/my-page">Min sida</a></li>
         <hr>
@@ -50,8 +50,8 @@ const toggleSidebar = () => {
   color: #2c3e50;
 }
 
-img {
-  width: 100%;
+li {
+  padding-left: 1vw;
 }
 
 .border { 
@@ -63,8 +63,7 @@ img {
 #hamburger-menu {
   z-index: 1;
   position: fixed;
-  top: 5px;
-  right: 10px;
+  top: 1vh;
   width: 80px;
   border-radius: 15px;
   height: 30px;
@@ -73,6 +72,7 @@ img {
   cursor: pointer;
   background-color: #875e29;
   color: white;
+  transition: 0.3s;
 }
 
 #sidebar-menu {
