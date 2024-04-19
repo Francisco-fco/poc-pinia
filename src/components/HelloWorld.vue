@@ -1,21 +1,7 @@
 <template>
+  <hr />
   <div>
-    <div>
-      <h3>Posts</h3>
-      <hr />
-      <p v-for="post in store.posts" :key="post.id">
-        {{ post }}
-      </p>
-      <hr />
-    </div>
-
-    <div>
-      <form @submit.prevent="addPost">
-        <label>Text: </label>
-        <input v-model="input" type="text" id="input" required />
-        <button type="submit">Post text</button>
-      </form>
-    </div>
+    dsadas
   </div>
 </template>
 
@@ -24,8 +10,7 @@ import { ref, onMounted } from "vue";
 import { useStore, Store } from "@/store/state";
 
 export default {
-  components: {
-  },
+  components: {},
   setup() {
     const store: Store = useStore();
     const input = ref("");

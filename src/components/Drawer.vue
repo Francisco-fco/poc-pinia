@@ -1,29 +1,71 @@
 <template>
   <div class="container">
     <nav id="sidebar-menu" :style="{ left: showSidebar ? '0' : '-350px' }">
-      <label id="hamburger-menu" :style="{ left: showSidebar ? 'calc(400px - 80px)' : '10px' }" @click="toggleSidebar">Meny ☰</label>
-      <ul style="padding: 0;">
-        <li><button class="close-button" @click="toggleSidebar">Stäng ✖</button></li>
+      <label
+        id="hamburger-menu"
+        :style="{ left: showSidebar ? 'calc(400px - 80px)' : '10px' }"
+        style="background-color: #22458a"
+        @click="toggleSidebar"
+        >Meny ☰</label
+      >
+      <ul style="padding: 0; margin: 0">
+        <li
+          style="
+            background-color: #22458a;
+            padding: 0.8vw;
+            display: flex;
+            justify-content: end;
+          "
+        >
+          <span style="font-size: 20px; color: white"
+            ><a
+              style="font-size: 19px; color: white; cursor: pointer"
+              @click="toggleSidebar"
+              >Stäng ✖</a
+            ></span
+          >
+        </li>
+        <hr style="margin: 0" />
         <li><a href="/">Start</a></li>
-        <hr>
+        <hr />
         <li><a href="/my-page">Min sida</a></li>
-        <hr>
+        <hr />
         <li><a href="/emaillist">E-postlistor</a></li>
-        <hr>
+        <hr />
         <li><a href="/emaillist-measure">E-postlistor för åtgärd</a></li>
-        <hr>
+        <hr />
         <li><a href="/shared-maillist">Delade brevlådor</a></li>
-        <hr>
+        <hr />
         <li><a href="/resource-mailboxes">Resursbrevlådor</a></li>
-        <hr>
-        <li><a href="/resource-mailboxes-measure">Resursbrevlådor för åtgärd</a></li>
-        <hr>
+        <hr />
+        <li><a href="/resource-mailboxes">Resursbrevlådor</a></li>
+        <hr />
         <li><a href="/contacts">Kontakter</a></li>
-        <hr>
-        <li><a href="/admin">Administration -> DROPDOWN</a></li>
-        <hr>
-        <li><a href="/act-as">Agera som -> DROPDOWN</a></li>
-        <hr>
+        <hr />
+        <li>
+          <a style="cursor: pointer" @click="toggleDropdown('administration')"
+            >Administration</a
+          >
+          <font-awesome-icon
+            @click="toggleDropdown('administration')"
+            v-if="!dropdowns.administration"
+            icon="fa-solid fa-caret-right"
+            size="lg"
+            style="padding-left: 1vw; cursor: pointer"
+          />
+          <font-awesome-icon
+            @click="toggleDropdown('administration')"
+            v-else
+            icon="fa-solid fa-caret-down"
+            size="lg"
+            style="padding-left: 1vw; cursor: pointer"
+          />
+          <ul v-if="dropdowns.administration" class="dropdown">
+            <li><a href="#">Option 1</a></li>
+            <li><a href="#">Option 2</a></li>
+          </ul>
+        </li>
+        <hr />
       </ul>
     </nav>
     <div class="overlay" v-if="showSidebar" @click="toggleSidebar"></div>
@@ -32,12 +74,21 @@
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue';
+import { ref } from "vue";
 
 const showSidebar = ref(false);
+const dropdowns = ref({
+  resourceMailboxes: false,
+  administration: false,
+  ageraSom: false,
+});
 
 const toggleSidebar = () => {
   showSidebar.value = !showSidebar.value;
+};
+
+const toggleDropdown = (dropdownName: any) => {
+  dropdowns.value[dropdownName] = !dropdowns.value[dropdownName];
 };
 </script>
 
@@ -54,7 +105,7 @@ li {
   padding-left: 1vw;
 }
 
-.border { 
+.border {
   border: solid 1px;
   font-size: 12px;
   padding: 0.4vw;
@@ -63,14 +114,13 @@ li {
 #hamburger-menu {
   z-index: 1;
   position: fixed;
-  top: 1vh;
-  width: 80px;
+  top: 1.6vh;
+  width: 5vw;
+  padding: 0.2vw;
   border-radius: 15px;
-  height: 30px;
   text-align: center;
   line-height: 30px;
   cursor: pointer;
-  background-color: #875e29;
   color: white;
   transition: 0.3s;
 }
@@ -82,9 +132,14 @@ li {
   left: -350px;
   width: 300px;
   height: 100%;
-  background-color: rgb(234, 234, 234);
+  background-color: rgb(244, 244, 244);
   transition: 0.3s;
   box-sizing: border-box;
+}
+
+.dropdown {
+  list-style-type: none;
+  padding-left: 1.5vw;
 }
 
 .close-button {

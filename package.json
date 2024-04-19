@@ -10,8 +10,12 @@
     "json-serer": "npx json-server db.json"
   },
   "dependencies": {
+    "@fortawesome/fontawesome-svg-core": "^6.5.2",
+    "@fortawesome/free-solid-svg-icons": "^6.5.2",
+    "@fortawesome/pro-solid-svg-icons": "^6.5.2",
     "axios": "^1.6.8",
     "bootstrap": "^5.3.3",
+    "fontawesome": "^5.6.3",
     "json-server": "^1.0.0-alpha.23",
     "pinia": "^2.1.7",
     "vue": "^3.3.8",
@@ -19,6 +23,8 @@
     "vue-router": "^4.3.0"
   },
   "devDependencies": {
+    "@fortawesome/pro-light-svg-icons": "^6.5.2",
+    "@fortawesome/vue-fontawesome": "^3.0.6",
     "@vitejs/plugin-vue": "^4.5.0",
     "sass": "^1.75.0",
     "typescript": "^5.2.2",
