@@ -19,8 +19,10 @@
         >
           <span style="font-size: 20px; color: white"
             ><a
+              tabindex="0"    
               style="font-size: 19px; color: white; cursor: pointer"
               @click="toggleSidebar"
+              @keyup.enter="toggleDropdown" 
               >Stäng ✖</a
             ></span
           >
@@ -43,22 +45,26 @@
         <li><a href="/contacts">Kontakter</a></li>
         <hr />
         <li>
-          <a style="cursor: pointer" @click="toggleDropdown('administration')"
+          <a tabindex="0" style="cursor: pointer" @click="toggleDropdown('administration')"
             >Administration</a
           >
           <font-awesome-icon
+          tabindex="0"
             @click="toggleDropdown('administration')"
+            @keyup.enter="toggleDropdown"
             v-if="!dropdowns.administration"
             icon="fa-solid fa-caret-right"
             size="lg"
-            style="padding-left: 1vw; cursor: pointer"
+            style="margin-left: 5vw; cursor: pointer"
           />
           <font-awesome-icon
+          tabindex="0"
             @click="toggleDropdown('administration')"
+            @keyup.enter="toggleDropdown"   
             v-else
             icon="fa-solid fa-caret-down"
             size="lg"
-            style="padding-left: 1vw; cursor: pointer"
+            style="margin-left: 5vw; cursor: pointer;"
           />
           <ul v-if="dropdowns.administration" class="dropdown">
             <li><a href="#">Option 1</a></li>

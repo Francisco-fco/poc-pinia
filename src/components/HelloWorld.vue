@@ -1,8 +1,6 @@
 <template>
   <hr />
-  <div>
-    dsadas
-  </div>
+  <MainView />
 </template>
 
 <script lang="ts">

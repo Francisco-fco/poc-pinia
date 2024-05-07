@@ -12,6 +12,15 @@ const routes: Array<RouteRecordRaw> = [
       breadcrumbs: []
     }
   },
+  {
+    path: '/my-page',
+    name: 'My page',
+    component: () => import('../Views/MainView.vue'),
+    meta: {
+      title: computed(() => "My page"),
+      breadcrumbs: []
+    }
+  },
 ]
 
 const router = createRouter({
