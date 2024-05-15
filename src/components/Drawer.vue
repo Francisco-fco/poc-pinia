@@ -133,7 +133,7 @@ li {
   z-index: 1;
   position: fixed;
   top: 1.6vh;
-  width: 5vw;
+  width: 3vw;
   padding: 0.2vw;
   border-radius: 15px;
   text-align: center;
