@@ -6,81 +6,34 @@
         :style="{ left: showSidebar ? 'calc(400px - 80px)' : '10px' }"
         style="background-color: #22458a"
         @click="toggleSidebar"
-        >Meny ☰</label
       >
+        Meny ☰
+      </label>
       <ul style="padding: 0; margin: 0">
-        <li
-          style="
-            background-color: #22458a;
-            padding: 0.8vw;
-            display: flex;
-            justify-content: end;
-          "
-        >
-          <span style="font-size: 20px; color: white"
-            ><a
+        <li style="background-color: #22458a; padding: 0.8vw; display: flex; justify-content: end;">
+          <span style="font-size: 20px; color: white;">
+            <a
               tabindex="0"    
-              style="font-size: 19px; color: white; cursor: pointer"
+              style="font-size: 19px; color: white; cursor: pointer;"
               @click="toggleSidebar"
               @keyup.enter="toggleDropdown" 
-              >Stäng ✖</a
-            ></span
-          >
+            >
+              Stäng ✖
+            </a>
+          </span>
         </li>
-        <hr style="margin: 0" />
-        <li><a href="/">Start</a></li>
-        <hr />
-        <li><a href="/my-page">Min sida</a></li>
-        <hr />
-        <li><a href="/emaillist">E-postlistor</a></li>
-        <hr />
-        <li><a href="/emaillist-measure">E-postlistor för åtgärd</a></li>
-        <hr />
-        <li><a href="/shared-maillist">Delade brevlådor</a></li>
-        <hr />
-        <li><a href="/resource-mailboxes">Resursbrevlådor</a></li>
-        <hr />
-        <li><a href="/resource-mailboxes">Resursbrevlådor</a></li>
-        <hr />
-        <li><a href="/contacts">Kontakter</a></li>
-        <hr />
-        <li>
-          <a tabindex="0" style="cursor: pointer" @click="toggleDropdown('administration')"
-            >Administration</a
-          >
-          <font-awesome-icon
-          tabindex="0"
-            @click="toggleDropdown('administration')"
-            @keyup.enter="toggleDropdown"
-            v-if="!dropdowns.administration"
-            icon="fa-solid fa-caret-right"
-            size="lg"
-            style="margin-left: 5vw; cursor: pointer"
-          />
-          <font-awesome-icon
-          tabindex="0"
-            @click="toggleDropdown('administration')"
-            @keyup.enter="toggleDropdown"   
-            v-else
-            icon="fa-solid fa-caret-down"
-            size="lg"
-            style="margin-left: 5vw; cursor: pointer;"
-          />
-          <ul v-if="dropdowns.administration" class="dropdown">
-            <li><a href="#">Option 1</a></li>
-            <li><a href="#">Option 2</a></li>
-          </ul>
+        <li style="padding: 0;" v-for="(menuItem, index) in menuItems" :key="index">
+          <a style="padding-left: 1vw;" :href="menuItem.route">{{ menuItem.text }}</a>
+          <hr v-if="index < menuItems.length - 1" />
         </li>
-        <hr />
       </ul>
     </nav>
     <div class="overlay" v-if="showSidebar" @click="toggleSidebar"></div>
-    <main class="my-3"><router-view></router-view></main>
   </div>
 </template>
 
 <script setup lang="ts">
-import { ref } from "vue";
+import { ref, computed } from "vue";
 
 const showSidebar = ref(false);
 const dropdowns = ref({
@@ -96,6 +49,18 @@ const toggleSidebar = () => {
 const toggleDropdown = (dropdownName: any) => {
   dropdowns.value[dropdownName] = !dropdowns.value[dropdownName];
 };
+
+const menuItems = computed(() => [
+  { route: "/", text: "Start" },
+  { route: "/my-page", text: "Min sida" },
+  { route: "/emaillist", text: "E-postlistor" },
+  { route: "/emaillist-measure", text: "E-postlistor för åtgärd" },
+  { route: "/shared-maillist", text: "Delade brevlådor" },
+  { route: "/resource-mailboxes", text: "Resursbrevlådor" },
+  { route: "/resource-mailboxes", text: "Resursbrevlådor" },
+  { route: "/contacts", text: "Kontakter" },
+]);
+
 </script>
 
 <style scoped lang="scss">
