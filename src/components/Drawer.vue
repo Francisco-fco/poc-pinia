@@ -12,28 +12,63 @@
         Meny ☰
       </label>
       <ul style="padding: 0; margin: 0">
-        <li style="background-color: #22458a; padding: 0.8vw; display: flex; justify-content: end;">
-          <span style="font-size: 20px; color: white;">
+        <li
+          style="
+            background-color: #22458a;
+            padding: 0.8vw;
+            display: flex;
+            justify-content: end;
+          "
+        >
+          <span style="font-size: 20px; color: white">
             <a
               tabindex="0"
-              style="font-size: 19px; color: white; cursor: pointer;"
+              style="font-size: 19px; color: white; cursor: pointer"
               @click="toggleSidebar"
               @keydown.enter="toggleSidebar"
             >
               Stäng ✖
             </a>
           </span>
-        </li>   
-        <li style="padding: 0;" v-for="(menuItem, index) in menuItems" :key="index">
+        </li>
+        <li
+          style="padding: 0"
+          v-for="(menuItem, index) in menuItems"
+          :key="index"
+        >
           <a
             tabindex="0"
-            style="padding-left: 1vw;"
+            style="padding-left: 1vw"
             :href="menuItem.route"
             @keydown.enter="navigateTo(menuItem.route)"
           >
             {{ menuItem.text }}
           </a>
           <hr v-if="index < menuItems.length - 1" />
+        </li>
+        <hr>
+        <li>
+          <a style="cursor: pointer" @click="toggleDropdown('administration')"
+            >Administration</a
+          >
+          <font-awesome-icon
+            @click="toggleDropdown('administration')"
+            v-if="!dropdowns.administration"
+            icon="fa-solid fa-caret-right"
+            size="lg"
+            style="padding-left: 1vw; cursor: pointer"
+          />
+          <font-awesome-icon
+            @click="toggleDropdown('administration')"
+            v-else
+            icon="fa-solid fa-caret-down"
+            size="lg"
+            style="padding-left: 1vw; cursor: pointer"
+          />
+          <ul v-if="dropdowns.administration" class="dropdown">
+            <li><a href="#">Option 1</a></li>
+            <li><a href="#">Option 2</a></li>
+          </ul>
         </li>
       </ul>
     </nav>
@@ -66,14 +101,13 @@ const menuItems = computed(() => [
   { route: "/emaillist-measure", text: "E-postlistor för åtgärd" },
   { route: "/shared-maillist", text: "Delade brevlådor" },
   { route: "/resource-mailboxes", text: "Resursbrevlådor" },
-  { route: "/resource-mailboxes", text: "Resursbrevlådor" },
+  { route: "/resource-mailboxes", text: "Resursbrevlådor för åtgärd" },
   { route: "/contacts", text: "Kontakter" },
 ]);
 
 const navigateTo = (route: string) => {
   window.location.href = route;
 };
-
 </script>
 
 <style scoped lang="scss">
