@@ -108,6 +108,18 @@ li {
   box-sizing: border-box;
 }
 
+#sidebar-menu li {
+  list-style-type: none;
+  line-height: 2.8rem;
+}
+
+#sidebar-menu a {
+  color: #875e29;
+  font-size: 16px;
+  text-decoration: none;
+}
+
+
 .dropdown {
   list-style-type: none;
   padding-left: 1.5vw;
@@ -121,21 +133,6 @@ li {
   border: none;
   font-size: 20px;
   cursor: pointer;
-}
-
-#sidebar-menu ul {
-  padding-right: 0px;
-}
-
-#sidebar-menu li {
-  list-style-type: none;
-  line-height: 2.8rem;
-}
-
-#sidebar-menu a {
-  color: #875e29;
-  font-size: 16px;
-  text-decoration: none;
 }
 
 .overlay {
