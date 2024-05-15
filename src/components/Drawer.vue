@@ -5,6 +5,8 @@
         id="hamburger-menu"
         :style="{ left: showSidebar ? 'calc(400px - 80px)' : '10px' }"
         style="background-color: #22458a"
+        tabindex="0"
+        @keydown.enter="toggleSidebar"
         @click="toggleSidebar"
       >
         Meny ☰
@@ -13,17 +15,24 @@
         <li style="background-color: #22458a; padding: 0.8vw; display: flex; justify-content: end;">
           <span style="font-size: 20px; color: white;">
             <a
-              tabindex="0"    
+              tabindex="0"
               style="font-size: 19px; color: white; cursor: pointer;"
               @click="toggleSidebar"
-              @keyup.enter="toggleDropdown" 
+              @keydown.enter="toggleSidebar"
             >
               Stäng ✖
             </a>
           </span>
-        </li>
+        </li>   
         <li style="padding: 0;" v-for="(menuItem, index) in menuItems" :key="index">
-          <a style="padding-left: 1vw;" :href="menuItem.route">{{ menuItem.text }}</a>
+          <a
+            tabindex="0"
+            style="padding-left: 1vw;"
+            :href="menuItem.route"
+            @keydown.enter="navigateTo(menuItem.route)"
+          >
+            {{ menuItem.text }}
+          </a>
           <hr v-if="index < menuItems.length - 1" />
         </li>
       </ul>
@@ -60,6 +69,10 @@ const menuItems = computed(() => [
   { route: "/resource-mailboxes", text: "Resursbrevlådor" },
   { route: "/contacts", text: "Kontakter" },
 ]);
+
+const navigateTo = (route: string) => {
+  window.location.href = route;
+};
 
 </script>
 
@@ -108,18 +121,6 @@ li {
   box-sizing: border-box;
 }
 
-#sidebar-menu li {
-  list-style-type: none;
-  line-height: 2.8rem;
-}
-
-#sidebar-menu a {
-  color: #875e29;
-  font-size: 16px;
-  text-decoration: none;
-}
-
-
 .dropdown {
   list-style-type: none;
   padding-left: 1.5vw;
@@ -133,6 +134,21 @@ li {
   border: none;
   font-size: 20px;
   cursor: pointer;
+}
+
+#sidebar-menu ul {
+  padding-right: 0px;
+}
+
+#sidebar-menu li {
+  list-style-type: none;
+  line-height: 2.8rem;
+}
+
+#sidebar-menu a {
+  color: #875e29;
+  font-size: 16px;
+  text-decoration: none;
 }
 
 .overlay {
